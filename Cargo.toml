@@ -1,0 +1,23 @@
+[package]
+name = "async-mutex"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[features]
+default = ["sync"]
+sync = []
+
+[dependencies]
+cfg-if = "1"
+futures = "0.3"
+sento = "0.1"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full"] }
+rand = "0.8"
+criterion = { version = "0.3", features = ["async_tokio"] }
+
+[[bench]]
+name = "main"
+harness = false
