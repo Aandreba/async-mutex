@@ -6,7 +6,7 @@ use crate::{Flag, FALSE, TRUE, queue::Queue, waker::Waker};
 /// A mutex that is not attached to any value
 pub struct MovableMutex {
     pub(crate) locked: Flag,
-    pub(crate) queue: Queue<Waker>
+    pub(crate) queue: Queue
 }
 
 impl MovableMutex {
@@ -79,9 +79,7 @@ impl MovableMutex {
         assert_eq!(self.locked.swap(FALSE, Ordering::Release), TRUE);
         #[cfg(not(debug_assertions))]
         self.locked.store(FALSE, Ordering::Release);
-        if let Some(waker) = self.queue.pop() {
-            waker.wake();
-        }
+        self.queue.wake();
     }
 }
 

@@ -3,6 +3,7 @@ use async_mutex::Mutex;
 use futures::future::{join_all, try_join_all};
 
 const SIZE : usize = 10_000;
+//const SIZE : usize = 1000;
 
 #[test]
 fn only_sync () {
